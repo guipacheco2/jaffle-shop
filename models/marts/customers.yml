@@ -1,5 +1,7 @@
 models:
   - name: customers
+    config:
+      access: public
     description: Customer overview data mart, offering key details for each unique customer. One row per customer.
     data_tests:
       - dbt_utils.expression_is_true:
