@@ -1,3 +1,8 @@
+{{config(
+  materialized = 'view',
+  query_settings = { 'allow_suspicious_low_cardinality_types': 1 }
+)}}
+
 with
 
 source as (
