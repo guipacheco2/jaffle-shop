@@ -23,9 +23,9 @@ renamed as (
         {{ cents_to_dollars('price') }} as product_price,
 
         ---------- booleans
-        coalesce(type = 'jaffle', false) as is_food_item,
+        coalesce(type = 'jaffle', false) ::Bool as is_food_item,
 
-        coalesce(type = 'beverage', false) as is_drink_item
+        coalesce(type = 'beverage', false) ::Bool as is_drink_item
 
     from source
 
