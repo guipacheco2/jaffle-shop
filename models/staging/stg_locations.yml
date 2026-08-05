@@ -14,9 +14,6 @@ unit_tests:
     model: stg_locations
     given:
       - input: source('ecom', 'raw_stores')
-        column_overrides:
-          id:
-            data_type: Int32
         rows:
           - {
               id: 1,
