@@ -33,7 +33,5 @@ models:
       +materialized: view
     marts:
       +materialized: table
-    query_settings:
-      allow_suspicious_low_cardinality_types: 1
 flags:
   require_generic_test_arguments_property: true
