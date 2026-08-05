@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staging layer for customer data with standardized column names
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    description: Staging layer for order data with cleaned status values
+    columns:
+      - name: order_id
+        description: Unique order identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_payments
+    description: Staging layer for payment data with standardized structure
+    columns:
+      - name: payment_id
+        description: Unique payment identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_order_items
+    description: Staging layer for order line items with consistent naming
+    columns:
+      - name: order_item_id
+        description: Unique order item identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    description: Staging layer for product catalog
+    columns:
+      - name: product_id
+        description: Unique product identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_locations
+    description: Staging layer for geographic locations
+    columns:
+      - name: location_id
+        description: Unique location identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_supplies
+    description: Staging layer for order fulfillment supplies
+    columns:
+      - name: supply_id
+        description: Unique supply identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_customers
+    description: Customer dimension table with enriched customer attributes
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_products
+    description: Product dimension table with pricing information
+    columns:
+      - name: product_id
+        description: Unique product identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_locations
+    description: Location dimension table for geographic reference
+    columns:
+      - name: location_id
+        description: Unique location identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_supplies
+    description: Supply dimension table for order fulfillment items
+    columns:
+      - name: supply_id
+        description: Unique supply identifier
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fct_orders
+    description: Orders fact table with customer and payment context
+    columns:
+      - name: order_id
+        description: Unique order identifier
+        data_tests:
+          - unique:
+              config:
+                enabled: "{{ target.name != 'clickhouse' }}"
+          - not_null:
+              config:
+                enabled: "{{ target.name != 'clickhouse' }}"
+
+  - name: fct_order_items
+    description: Order line items fact table with product details and order context
+    columns:
+      - name: order_item_id
+        description: Unique order item identifier
+        data_tests:
+          - unique
+          - not_null

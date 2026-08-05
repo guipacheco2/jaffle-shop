@@ -1,0 +1,11 @@
+id,order_id,payment_method,amount
+1,1,credit_card,1000
+2,2,credit_card,2000
+3,3,credit_card,100
+4,4,credit_card,2000
+5,5,credit_card,5100
+6,6,credit_card,200
+7,7,credit_card,5000
+8,8,credit_card,1500
+9,9,credit_card,1200
+10,10,credit_card,3000

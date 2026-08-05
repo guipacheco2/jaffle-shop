@@ -1,22 +1,83 @@
 version: 2
 
 sources:
-  - name: ecom
-    schema: raw
-    description: E-commerce data for the Jaffle Shop
+  - name: raw
+    description: |
+      Raw data imported from external sources. These tables contain the
+      unmodified source system data and are loaded via dbt seed files.
     tables:
       - name: raw_customers
-        description: One record per person who has purchased one or more items
+        description: Raw customer data with basic contact information
+        columns:
+          - name: id
+            description: Primary key for customers
+          - name: first_name
+            description: Customer first name
+          - name: last_name
+            description: Customer last name
+
       - name: raw_orders
-        description: One record per order (consisting of one or more order items)
-        config:
-          loaded_at_field: ordered_at
-      - name: raw_items
-        description: Items included in an order
-      - name: raw_stores
-        config:
-          loaded_at_field: opened_at
+        description: Raw orders data with order status and date information
+        columns:
+          - name: id
+            description: Primary key for orders
+          - name: user_id
+            description: Foreign key to customers
+          - name: order_date
+            description: Date the order was placed
+          - name: status
+            description: Order status (completed, pending, etc)
+
+      - name: raw_payments
+        description: Raw payment data for orders
+        columns:
+          - name: id
+            description: Primary key for payments
+          - name: order_id
+            description: Foreign key to orders
+          - name: payment_method
+            description: Method used for payment
+          - name: amount
+            description: Payment amount in cents
+
+      - name: raw_order_items
+        description: Line items within orders
+        columns:
+          - name: id
+            description: Primary key for order items
+          - name: order_id
+            description: Foreign key to orders
+          - name: product_id
+            description: Foreign key to products
+          - name: quantity
+            description: Quantity of product ordered
+
       - name: raw_products
-        description: One record per SKU for items sold in stores
+        description: Product catalog with pricing information
+        columns:
+          - name: id
+            description: Primary key for products
+          - name: name
+            description: Product name
+          - name: price
+            description: Product price in cents
+
+      - name: raw_locations
+        description: Geographic locations
+        columns:
+          - name: id
+            description: Primary key for locations
+          - name: name
+            description: Location name
+          - name: address
+            description: Location address
+
       - name: raw_supplies
-        description: One record per supply per SKU of items sold in stores
+        description: Supplies used for order fulfillment
+        columns:
+          - name: id
+            description: Primary key for supplies
+          - name: name
+            description: Supply name
+          - name: cost
+            description: Supply cost in dollars
